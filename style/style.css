@@ -1,0 +1,102 @@
+* {
+  font-family: "Comic Neue", cursive;
+  font-family: "Martian Mono", monospace;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+}
+
+.styled-table {
+  border-collapse: collapse;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  font-size: 0.9em;
+  min-width: 300px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+  align-content: center;
+  background-color: #645bdf;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #645bdf;
+}
+
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #645bdf;
+}
+
+.add-product-to-card {
+  background-image: linear-gradient(
+    92.88deg,
+    #455eb5 9.16%,
+    #5643cc 43.89%,
+    #673fd7 64.72%
+  );
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 26px;
+  font-weight: 300;
+  height: 3rem;
+  padding: 0 1.6rem;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all 0.5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.add-product-to-card:hover {
+  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+  transition-duration: 0.1s;
+}
+
+.add-product-to-card:active {
+  color: black;
+  background: #ffffff;
+  transition-duration: 0.1s;
+}
+
+@media (min-width: 768px) {
+  .add-product-to-card {
+    padding: 0 2.6rem;
+  }
+}
+
+.bxs-dollar-circle {
+  color: red;
+  font-size: 26px;
+}
