@@ -36,9 +36,8 @@ include("conection/db.php");
 // $stmt->execute();
 // $stmt->fetchAll();
 
-
-
 // $conn = null;
+//================================================================================
 
 header('Content-Type: application/json');
 
@@ -82,14 +81,4 @@ if (isset($data['num'])) {
         echo json_encode(array('error' => 'Database error: ' . $e->getMessage()));
     }
     echo json_encode(count($_SESSION['items']));
-}
-
-
-
-
-
-
-//=================================================================================
-
-if (isset($_SESSION['items'])) {
 }
