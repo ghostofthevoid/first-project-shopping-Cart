@@ -32,9 +32,3 @@ function sendDataToPHP(data) {
     })
     .catch((error) => console.error("Error:", error));
 }
-
-// async function foo() {
-//   let response = await fetch("api.php");
-//   return response.json();
-// }
-// console.log(foo());
