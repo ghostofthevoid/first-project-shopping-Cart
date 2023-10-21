@@ -19,6 +19,7 @@
             <nav class="navbar">
                 <a href="">Add products</a>
                 <a href="">View products</a>
+                <!-- how to change the quantity without reloading the page -->
                 <a href="cartPage.php"><i class='bx bxs-cart'><span><sup id="quantity">0</sup></span></i></a>
             </nav>
         </div>
