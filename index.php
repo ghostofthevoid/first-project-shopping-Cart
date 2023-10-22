@@ -1,23 +1,14 @@
 <?php
 session_start();
-include("conection/dbcon.php");
-include("header.php");
-include("conection/db.php");
+include "connector.php";
 $products = selectAll("products");
-tt($_SESSION)
+$quantity = count($_SESSION["items"]);
+//tt($_SESSION)
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viwe Products</title>
-  <link rel="stylesheet" href="style/style.css">
-  <link rel="stylesheet" href="style/header.css">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
+<?php include("header.php"); ?>
 
 <body>
 

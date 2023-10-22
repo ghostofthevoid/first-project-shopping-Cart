@@ -1,7 +1,6 @@
 <?php
 session_start();
-include "conection/dbcon.php";
-include("conection/db.php");
+include "connector.php";
 
 // if (($_REQUEST['test'] ?? 0) == 1) {
 //     echo json_encode($_REQUEST);
@@ -51,6 +50,7 @@ if (!isset($_SESSION['items'])) {
 if (isset($data['deleteId'])) {
     $_SESSION['items'] = removeFromCart($data['deleteId']);
     echo json_encode(count($_SESSION['items']));
+    die();
 }
 
 if (isset($data['num'])) {
@@ -69,16 +69,17 @@ if (isset($data['num'])) {
             if (!in_array(json_encode($result), $_SESSION['items'])) {
                 array_push($_SESSION['items'], json_encode($result));
             }
-
             $result['cart_quantity'] = count($_SESSION['items']);
-            //echo json_encode($result);
         } else {
             http_response_code(404);
             echo json_encode(array('error' => 'No product found for the given id'));
+            die();
         }
     } catch (PDOException $e) {
         http_response_code(500);
         echo json_encode(array('error' => 'Database error: ' . $e->getMessage()));
+        die();
     }
     echo json_encode(count($_SESSION['items']));
+    die();
 }

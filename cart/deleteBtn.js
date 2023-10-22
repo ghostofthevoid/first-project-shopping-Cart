@@ -1,4 +1,5 @@
 let deleteQueryBtn = document.querySelectorAll(".delete-button");
+let quantity = document.getElementById("quantity");
 
 //delete button section
 let deleteBtn = document.querySelectorAll(".delete-button");
@@ -40,7 +41,7 @@ function sendDataToPHP(data) {
   fetch(url, requestOptions)
     .then((response) => response.json()) // Parse the response as JSON
     .then((data) => {
-      console.log(data);
+      quantity.innerText = data;
       // Handle the response from PHP here
     })
     .catch((error) => console.error("Error:", error));

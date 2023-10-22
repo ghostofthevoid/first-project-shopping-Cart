@@ -1,4 +1,5 @@
 let myElement = document.getElementsByClassName("add-product-to-card");
+let quantity = document.getElementById("quantity");
 
 function myEventHandler() {
   let value = Number(this.getAttribute("data-shit-id"));
@@ -27,7 +28,7 @@ function sendDataToPHP(data) {
   fetch(url, requestOptions)
     .then((response) => response.json()) // Parse the response as JSON
     .then((data) => {
-      console.log(data);
+      quantity.innerText = data;
       // Handle the response from PHP here
     })
     .catch((error) => console.error("Error:", error));
