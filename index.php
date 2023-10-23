@@ -26,7 +26,7 @@ $quantity = count($_SESSION["items"]);
             <tr>
               <td><?= $item->name ?></td>
               <td><img src="<?= $item->img ?>"></td>
-              <td><?= $item->price ?><i class='bx bxs-dollar-circle bx-rotate-180'></i></td>
+              <td><?= $item->price ?>$</td>
               <td><button class="add-product-to-card" data-shit-id="<?= $item->id ?>"><i class='bx bxs-cart'></i></button></td>
             </tr>
           </tbody>
