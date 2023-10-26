@@ -1,8 +1,6 @@
 <?php
 session_start();
 include "connector.php";
-
-
 $items = [];
 
 if (!empty($_SESSION['items'])) {
@@ -26,7 +24,7 @@ $quantity = count($_SESSION["items"]);
 
 <body>
     <div class="total-sum">
-        <span id="total">67</span>
+        <span id="total">0</span>
     </div>
 
     <?php if (!empty($items)) : ?>
@@ -36,7 +34,7 @@ $quantity = count($_SESSION["items"]);
                     <ul class="list">
                         <li><?= $item->name ?></li>
                         <li><img src="<?= $item->img ?>" alt="<?= $item->name ?>"></li>
-                        <li><?= $item->price ?>$</li>
+                        <li class="price"><?= $item->price ?>$</li>
                     </ul>
                     <div>
                         <button class="delete-button" delete-btn-id="<?= $item->id ?>">Delete</button>

@@ -21,6 +21,7 @@ deleteQueryBtn.forEach((deleteButton) => {
       const obj = { deleteId: pick };
       sendDataToPHP(obj);
     }
+    location.reload();
   });
 });
 

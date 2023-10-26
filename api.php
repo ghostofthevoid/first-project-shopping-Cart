@@ -69,7 +69,6 @@ if (isset($data['num'])) {
             if (!in_array(json_encode($result), $_SESSION['items'])) {
                 array_push($_SESSION['items'], json_encode($result));
             }
-            $result['cart_quantity'] = count($_SESSION['items']);
         } else {
             http_response_code(404);
             echo json_encode(array('error' => 'No product found for the given id'));

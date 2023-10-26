@@ -1,20 +1,29 @@
 const plus = document.querySelectorAll(".plus"),
   minus = document.querySelectorAll(".minus"),
   num = document.querySelectorAll(".num");
+let price = document.querySelectorAll(".price");
 
+let sum = 0;
 for (let i = 0; i < plus.length; i++) {
-  let caunt = 1;
+  sum += Number(price[i].innerText.match(/\d+/g));
+  let count = 1;
+  let currentPrice = Number(price[i].innerText.match(/\d+/g));
+
   plus[i].addEventListener("click", () => {
-    caunt++;
-    caunt = caunt < 10 ? "0" + caunt : caunt;
-    num[i].value = caunt;
+    count++;
+    count = count < 10 ? "0" + count : count;
+    num[i].value = count;
+    document.getElementById("total").innerText = sum += currentPrice;
   });
 
   minus[i].addEventListener("click", () => {
-    if (caunt > 1) {
-      caunt--;
-      caunt = caunt < 10 ? "0" + caunt : caunt;
-      num[i].value = caunt;
+    if (count > 1) {
+      count--;
+      count = count < 10 ? "0" + count : count;
+      num[i].value = count;
+      document.getElementById("total").innerText = sum -= currentPrice;
     }
   });
 }
+
+document.getElementById("total").innerText = sum;
