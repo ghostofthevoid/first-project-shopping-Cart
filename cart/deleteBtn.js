@@ -1,3 +1,6 @@
+// TODO 1. set spacing
+// TODO 2. wrong spelling
+
 let deleteQueryBtn = document.querySelectorAll(".delete-button");
 let quantity = document.getElementById("quantity");
 
