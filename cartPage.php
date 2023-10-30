@@ -23,8 +23,13 @@ $quantity = count($_SESSION["items"]);
 <?php include("header.php"); ?>
 
 <body>
+    <button class="btn">
+        PURCHASE
+    </button>
     <div class="total-sum">
-        <span id="total">0</span>
+        <span>
+            <div id="total">0</div>
+        </span>
     </div>
 
     <?php if (!empty($items)) : ?>
@@ -32,7 +37,7 @@ $quantity = count($_SESSION["items"]);
             <div class="cart" cart-id="<?= $item->id ?>">
                 <div>
                     <ul class="list">
-                        <li><?= $item->name ?></li>
+                        <li class="name"><?= $item->name ?></li>
                         <li><img src="<?= $item->img ?>" alt="<?= $item->name ?>"></li>
                         <li class="price"><?= $item->price ?>$</li>
                     </ul>

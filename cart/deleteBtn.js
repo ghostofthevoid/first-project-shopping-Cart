@@ -1,15 +1,18 @@
 let deleteQueryBtn = document.querySelectorAll(".delete-button");
 let quantity = document.getElementById("quantity");
+let itemNames = document.querySelectorAll(".name");
 
 //delete button section
 let deleteBtn = document.querySelectorAll(".delete-button");
-
-function handelClick(e) {
-  const currentBtn = e.currentTarget;
-  currentBtn.closest(".cart").remove();
-}
-deleteBtn.forEach((button) => {
-  button.addEventListener("click", handelClick);
+console.log(localStorage);
+/////////////////////////////////////////////////////////
+deleteBtn.forEach((button, index) => {
+  //remove item from localStorage and html
+  button.addEventListener("click", (e) => {
+    const currentBtn = e.currentTarget;
+    localStorage.removeItem(itemNames[index].innerText.replace(/\s/g, "_"));
+    currentBtn.closest(".cart").remove();
+  });
 });
 //=======================================================
 
