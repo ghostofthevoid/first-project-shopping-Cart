@@ -4,6 +4,8 @@
 let quantity = document.getElementById("quantity");
 let itemNames = document.querySelectorAll(".name");
 let deleteButton = document.querySelectorAll(".delete-button");
+let totalPrice = Number(document.getElementById("total").innerText);
+console.log(totalPrice);
 
 deleteButton.forEach((button, index) => {
   //remove item from localStorage and html
@@ -11,7 +13,7 @@ deleteButton.forEach((button, index) => {
     const currentBtn = e.currentTarget;
     localStorage.removeItem(itemNames[index].innerText.replace(/\s/g, "_"));
     currentBtn.closest(".cart").remove();
-    location.reload();
+    //location.reload();
   });
 });
 //=======================================================
@@ -44,7 +46,9 @@ function sendDataToPHP(data) {
   fetch(url, requestOptions)
     .then((response) => response.json()) // Parse the response as JSON
     .then((data) => {
-      quantity.innerText = data;
+      quantity.innerText = data.quantityOfItems;
+      totalPrice -= data.item[0].price;
+      document.getElementById("total").innerText = totalPrice;
       // Handle the response from PHP here
     })
     .catch((error) => console.error("Error:", error));

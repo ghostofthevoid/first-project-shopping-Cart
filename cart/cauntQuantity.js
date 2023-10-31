@@ -4,7 +4,6 @@ const plus = document.querySelectorAll(".plus"),
   price = document.querySelectorAll(".price"),
   itemName = document.querySelectorAll(".name");
 
-console.log(localStorage);
 //Get quantity of item from localStorage by item name
 num.forEach((num, index) => {
   num.value =
