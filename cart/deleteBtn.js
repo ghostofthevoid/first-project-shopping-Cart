@@ -1,22 +1,19 @@
-let deleteQueryBtn = document.querySelectorAll(".delete-button");
+let deleteButton = document.querySelectorAll(".delete-button");
 let quantity = document.getElementById("quantity");
 let itemNames = document.querySelectorAll(".name");
 
-//delete button section
-let deleteBtn = document.querySelectorAll(".delete-button");
-console.log(localStorage);
-/////////////////////////////////////////////////////////
-deleteBtn.forEach((button, index) => {
+deleteButton.forEach((button, index) => {
   //remove item from localStorage and html
   button.addEventListener("click", (e) => {
     const currentBtn = e.currentTarget;
     localStorage.removeItem(itemNames[index].innerText.replace(/\s/g, "_"));
     currentBtn.closest(".cart").remove();
+    location.reload();
   });
 });
 //=======================================================
 
-deleteQueryBtn.forEach((deleteButton) => {
+deleteButton.forEach((deleteButton) => {
   deleteButton.addEventListener("click", (e) => {
     let del = e.currentTarget;
     let pick = del.getAttribute("delete-btn-id");
@@ -24,7 +21,6 @@ deleteQueryBtn.forEach((deleteButton) => {
       const obj = { deleteId: pick };
       sendDataToPHP(obj);
     }
-    location.reload();
   });
 });
 
