@@ -1,6 +1,9 @@
-let deleteButton = document.querySelectorAll(".delete-button");
+// TODO 1. set spacing
+// TODO 2. wrong spelling
+
 let quantity = document.getElementById("quantity");
 let itemNames = document.querySelectorAll(".name");
+let deleteButton = document.querySelectorAll(".delete-button");
 
 deleteButton.forEach((button, index) => {
   //remove item from localStorage and html

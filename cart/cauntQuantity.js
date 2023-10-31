@@ -11,13 +11,14 @@ num.forEach((num, index) => {
     localStorage.getItem(itemName[index].innerText.replace(/\s/g, "_")) || "01";
 });
 
-let sum = 0;
+let sumOfAllItems = 0;
 for (let i = 0; i < plus.length; i++) {
-  sum += Number(price[i].innerText.match(/\d+/g));
+  sumOfAllItems += Number(price[i].innerText.match(/\d+/g));
+  // get data for item counter from localStorage
   let count = parseInt(
     localStorage.getItem(itemName[i].innerText.replace(/\s/g, "_")) || 0
   );
-  //get price for current item
+  //get price of current item
   let currentPrice = Number(price[i].innerText.match(/\d+/g));
 
   plus[i].addEventListener("click", () => {
@@ -25,7 +26,7 @@ for (let i = 0; i < plus.length; i++) {
       count++;
       updateValue(count, i);
     }
-    document.getElementById("total").innerText = sum += currentPrice;
+    document.getElementById("total").innerText = sumOfAllItems += currentPrice;
   });
 
   minus[i].addEventListener("click", () => {
@@ -33,12 +34,13 @@ for (let i = 0; i < plus.length; i++) {
       if (count > 1) {
         count--;
         updateValue(count, i);
-        document.getElementById("total").innerText = sum -= currentPrice;
+        document.getElementById("total").innerText = sumOfAllItems -=
+          currentPrice;
       }
     }
   });
 }
-document.getElementById("total").innerText = sum;
+document.getElementById("total").innerText = sumOfAllItems;
 
 function updateValue(newValue, index) {
   let key = itemName[index].innerText.replace(/\s/g, "_");
