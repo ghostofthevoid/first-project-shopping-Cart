@@ -1,31 +1,38 @@
 const plus = document.querySelectorAll(".plus"),
   minus = document.querySelectorAll(".minus"),
   num = document.querySelectorAll(".num"),
-  price = document.querySelectorAll(".price"),
+  itemPrice = document.querySelectorAll(".price"),
   itemName = document.querySelectorAll(".name");
+let totalAmount = document.getElementById("total");
+let totalSum = 0;
 
-//Get quantity of item from localStorage by item name
-num.forEach((num, index) => {
-  num.value =
-    localStorage.getItem(itemName[index].innerText.replace(/\s/g, "_")) || "01";
+console.log(localStorage.getItem("total_sum"));
+
+totalAmount.innerText = localStorage.getItem("total_sum") || 0;
+
+itemPrice.forEach((currentValue) => {
+  totalSum += Number(currentValue.innerText.match(/\d+/g));
 });
 
-let sumOfAllItems = 0;
+num.forEach((num, index) => {
+  num.value =
+    localStorage.getItem(itemName[index].innerText.replace(/\s/g, "_")) || "01"; //Get quantity of item from localStorage by item name
+});
+
 for (let i = 0; i < plus.length; i++) {
-  sumOfAllItems += Number(price[i].innerText.match(/\d+/g));
-  // get data for item counter from localStorage
+  //totalSum += Number(itemPrice[i].innerText.match(/\d+/g));
+
   let count = parseInt(
-    localStorage.getItem(itemName[i].innerText.replace(/\s/g, "_")) || 0
-  );
-  //get price of current item
-  let currentPrice = Number(price[i].innerText.match(/\d+/g));
+    localStorage.getItem(itemName[i].innerText.replace(/\s/g, "_")) || 1
+  ); // get data of item counter from localStorage
+  let currentitemPrice = Number(itemPrice[i].innerText.match(/\d+/g)); //get itemPrice of current item
 
   plus[i].addEventListener("click", () => {
     if (!isNaN(count)) {
       count++;
       updateValue(count, i);
     }
-    document.getElementById("total").innerText = sumOfAllItems += currentPrice;
+    totalSum += currentitemPrice;
   });
 
   minus[i].addEventListener("click", () => {
@@ -33,16 +40,18 @@ for (let i = 0; i < plus.length; i++) {
       if (count > 1) {
         count--;
         updateValue(count, i);
-        document.getElementById("total").innerText = sumOfAllItems -=
-          currentPrice;
+        totalSum -= currentitemPrice;
       }
     }
   });
 }
-document.getElementById("total").innerText = sumOfAllItems;
 
 function updateValue(newValue, index) {
   let key = itemName[index].innerText.replace(/\s/g, "_");
   num[index].value = newValue < 10 ? `0${newValue}` : newValue.toString();
   localStorage.setItem(key, num[index].value);
+  localStorage.setItem("total_sum", totalSum);
+  totalAmount.innerText = totalSum;
 }
+
+//localStorage.clear();

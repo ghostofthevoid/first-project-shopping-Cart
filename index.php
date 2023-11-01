@@ -2,8 +2,11 @@
 session_start();
 include "connector.php";
 $products = selectAll("products");
-$quantity = count($_SESSION["items"]);
-//tt($_SESSION)
+isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 0;
+
+
+
+// tt($_SESSION)
 ?>
 
 <!DOCTYPE html>

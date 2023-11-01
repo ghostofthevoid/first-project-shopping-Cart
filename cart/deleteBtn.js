@@ -5,7 +5,6 @@ let quantity = document.getElementById("quantity");
 let itemNames = document.querySelectorAll(".name");
 let deleteButton = document.querySelectorAll(".delete-button");
 let totalPrice = Number(document.getElementById("total").innerText);
-console.log(totalPrice);
 
 deleteButton.forEach((button, index) => {
   //remove item from localStorage and html
