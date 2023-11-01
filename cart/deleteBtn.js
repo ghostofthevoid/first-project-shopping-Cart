@@ -12,7 +12,6 @@ deleteButton.forEach((button, index) => {
     const currentBtn = e.currentTarget;
     localStorage.removeItem(itemNames[index].innerText.replace(/\s/g, "_"));
     currentBtn.closest(".cart").remove();
-    //location.reload();
   });
 });
 //=======================================================
@@ -48,6 +47,10 @@ function sendDataToPHP(data) {
       quantity.innerText = data.quantityOfItems;
       totalPrice -= data.item[0].price;
       document.getElementById("total").innerText = totalPrice;
+      if (data.quantityOfItems == 0) {
+        localStorage.clear();
+        location.reload();
+      }
       // Handle the response from PHP here
     })
     .catch((error) => console.error("Error:", error));

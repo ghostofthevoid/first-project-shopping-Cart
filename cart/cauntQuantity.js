@@ -8,11 +8,13 @@ let totalSum = 0;
 
 console.log(localStorage.getItem("total_sum"));
 
-totalAmount.innerText = localStorage.getItem("total_sum") || 0;
-
-itemPrice.forEach((currentValue) => {
-  totalSum += Number(currentValue.innerText.match(/\d+/g));
-});
+if (localStorage.getItem("total_sum")) {
+  totalAmount.innerText = localStorage.getItem("total_sum");
+} else {
+  itemPrice.forEach((currentValue) => {
+    totalSum += Number(currentValue.innerText.match(/\d+/g));
+  });
+}
 
 num.forEach((num, index) => {
   num.value =
@@ -53,5 +55,3 @@ function updateValue(newValue, index) {
   localStorage.setItem("total_sum", totalSum);
   totalAmount.innerText = totalSum;
 }
-
-//localStorage.clear();
