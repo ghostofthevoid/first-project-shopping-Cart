@@ -28,7 +28,7 @@ $quantity = count($_SESSION["items"]);
     </button>
     <div class="total-sum">
         <span>
-            <div id="total"></div>
+            <div id="total">0</div>
         </span>
     </div>
 

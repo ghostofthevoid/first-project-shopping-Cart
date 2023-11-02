@@ -4,7 +4,6 @@
 let quantity = document.getElementById("quantity");
 let itemNames = document.querySelectorAll(".name");
 let deleteButton = document.querySelectorAll(".delete-button");
-let totalPrice = Number(document.getElementById("total").innerText);
 
 deleteButton.forEach((button, index) => {
   //remove item from localStorage and html
@@ -16,18 +15,18 @@ deleteButton.forEach((button, index) => {
 });
 //=======================================================
 
-deleteButton.forEach((deleteButton) => {
+deleteButton.forEach((deleteButton, index) => {
   deleteButton.addEventListener("click", (e) => {
     let del = e.currentTarget;
     let pick = del.getAttribute("delete-btn-id");
     if (pick) {
       const obj = { deleteId: pick };
-      sendDataToPHP(obj);
+      sendDataToPHP(obj, index);
     }
   });
 });
 
-function sendDataToPHP(data) {
+function sendDataToPHP(data, index) {
   // URL of the PHP script
   const url = "api.php";
 
@@ -44,9 +43,12 @@ function sendDataToPHP(data) {
   fetch(url, requestOptions)
     .then((response) => response.json()) // Parse the response as JSON
     .then((data) => {
+      let quantityOfCurrentProduct = Number(num[index].value);
+
       quantity.innerText = data.quantityOfItems;
-      totalPrice -= data.item[0].price;
-      document.getElementById("total").innerText = totalPrice;
+      totalSum -= data.item[0].price * quantityOfCurrentProduct;
+
+      document.getElementById("total").innerText = totalSum;
       if (data.quantityOfItems == 0) {
         localStorage.clear();
         location.reload();
