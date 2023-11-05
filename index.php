@@ -37,7 +37,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
       </table>
     </section>
   </div>
-  <script src="index.js"></script>
+  <script src="js/index.js"></script>
 
 </body>
 

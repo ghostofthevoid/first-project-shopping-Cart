@@ -64,8 +64,8 @@ $quantity = count($_SESSION["items"]);
 
         </div>
     <?php endif ?>
-    <script src="cart/cauntQuantity.js"></script>
-    <script src="cart/deleteBtn.js"></script>
+    <script src="js/components/cauntQuantity.js"></script>
+    <script src="js/components/deleteBtn.js"></script>
 </body>
 
 
