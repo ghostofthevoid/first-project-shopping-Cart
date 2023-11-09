@@ -9,7 +9,10 @@ if (!empty($_SESSION['items'])) {
     }
 }
 $items  = flattenArray($items);
-$quantity = count($_SESSION["items"]);
+
+isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 0;
+
+
 
 // tt($_SESSION);
 
@@ -21,52 +24,66 @@ $quantity = count($_SESSION["items"]);
 <!DOCTYPE html>
 <html lang="en">
 <?php include("header.php"); ?>
+<link rel="stylesheet" href="style/components/cart.css">
 
 <body>
-    <button class="btn">
-        PURCHASE
-    </button>
-    <div class="total-sum">
-        <span>
-            <div id="total">0</div>
-        </span>
-    </div>
+    <section class="h-100  h-custom py-5" style="background-color: #eee;">
+        <div class="container h-100 py-5 ">
+            <div class="row d-flex  justify-content-center h-100 ">
+                <div class="col-xl-8">
+                    <div class="card shopping-cart " style="border-radius: 15px;">
+                        <?php if (!empty($items)) : ?>
+                            <div class="card-body text-black ">
+                                <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Your products</h3>
+                                <?php foreach ($items as $item) : ?>
+                                    <div class="cart d-flex align-items-center mb-5 ">
+                                        <div class="flex-shrink justify-content-start ">
+                                            <img src="<?= $item->img ?>" class="mx-auto d-block" style="width: 150px; height: 150px" alt="<?= $item->name ?>">
+                                        </div>
 
-    <?php if (!empty($items)) : ?>
-        <?php foreach ($items as $item) : ?>
-            <div class="cart" cart-id="<?= $item->id ?>">
-                <div>
-                    <ul class="list">
-                        <li class="name"><?= $item->name ?></li>
-                        <li><img src="<?= $item->img ?>" alt="<?= $item->name ?>"></li>
-                        <li class="price"><?= $item->price ?>$</li>
-                    </ul>
-                    <div>
-                        <button class="delete-button" delete-btn-id="<?= $item->id ?>">Delete</button>
-                    </div>
-                </div>
-                <div>
-                    <div class="wrapped">
-                        <button class="minus">-</button>
-                        <input type="text" class="num" value="01"></input>
-                        <button class="plus">+</button>
+                                        <div class="flex-grow-1 ms-3  ">
+                                            <div class="btn-del container-fluid ">
+                                                <button type="button" class=" delete-button btn btn-outline-danger" delete-btn-id="<?= $item->id ?>"><i class="fa-solid fa-trash-can"></i></button>
+                                            </div>
+                                            <div class="container">
+                                                <h5 class="name text-primary"><?= $item->name ?></h5>
+                                                <h6 style="color: #9e9e9e;">Color: <?= $item->color ?></h6>
+                                            </div>
+                                            <div class="d-flex align-items-center ms-auto fw-bolder pb-2">
+                                                <p class="price fw-bold mb-0 me-5 pe-3"><?= $item->price ?>$</p>
+                                                <div class="wrapped container-sm  justify-content-between " style="max-width: 150px">
+                                                    <button type="button" class="minus btn btn-white fs-3 fw-bolder">-</button>
+                                                    <input type="text" class="num form-control fs-3 fw-bold " value="01"></input>
+                                                    <button type="button" class="plus btn btn-white fs-3   fw-bolder">+</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach ?>
+                                <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+                                <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+                                    <h5 class="fw-bold mb-0">Total:</h5>
+                                    <h5 class="fw-bold mb-0" id="total">0</h5>
+                                </div>
+
+                                <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+                                <div class="d-grid mt-5">
+                                    <button type="button" class="btn buy-btn btn-block btn-lg fw-bold">Buy now</button>
+                                </div>
+                            </div>
+                        <?php else : ?>
+                            <div class="alert alert-primary py-5">
+                                <strong>Info!</strong> Your cart is empty pleas GO back <a href="index.php" class="alert-link">HOME:)</a>.
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
-
-        <?php endforeach ?>
-    <?php else : ?>
-        <div class="message">
-            <pre>
-            <h2>Your cart is empty</h2>
-            <h2>Pleas go back</h2>
-            </pre>
-
         </div>
-    <?php endif ?>
+        </div>
+    </section>
     <script src="js/components/cauntQuantity.js"></script>
     <script src="js/components/deleteBtn.js"></script>
 </body>
-
 
 </html>

@@ -1,8 +1,9 @@
-let myElement = document.getElementsByClassName("add-product-to-card");
+let myElement = document.getElementsByClassName("add-product-to-card ");
 let quantity = document.getElementById("quantity");
 
 function myEventHandler() {
   let specificIdOfItem = Number(this.getAttribute("data-shit-id"));
+  console.log(this.getAttribute("data-shit-id"));
   let numObj = { num: specificIdOfItem };
   sendDataToPHP(numObj);
 }
