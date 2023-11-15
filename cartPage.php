@@ -24,7 +24,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
 <!DOCTYPE html>
 <html lang="en">
 <?php include("header.php"); ?>
-<link rel="stylesheet" href="style/components/cart.css">
+<link rel="stylesheet" href="Public\style\components\cart.css">
 
 <body>
     <section class="h-100  h-custom py-5" style="background-color: #eee;">
@@ -38,7 +38,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
                                 <?php foreach ($items as $item) : ?>
                                     <div class="cart d-flex align-items-center mb-5 ">
                                         <div class="flex-shrink justify-content-start ">
-                                            <img src="<?= $item->img ?>" class="mx-auto d-block" style="width: 150px; height: 150px" alt="<?= $item->name ?>">
+                                            <img src="Public/images/<?= $item->id ?>.png" class="mx-auto d-block" style="width: 150px; height: 150px" alt="<?= $item->name ?>">
                                         </div>
 
                                         <div class="flex-grow-1 ms-3  ">
@@ -82,8 +82,8 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
         </div>
         </div>
     </section>
-    <script src="js/components/cauntQuantity.js"></script>
-    <script src="js/components/deleteBtn.js"></script>
+    <script src="Public/js/components/cauntQuantity.js"></script>
+    <script src="Public/js/components/deleteBtn.js"></script>
 </body>
 
 </html>

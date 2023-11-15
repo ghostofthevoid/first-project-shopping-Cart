@@ -21,7 +21,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
         <div class="col-md-8 col-lg-6 col-xl-4">
           <div class="card" style="border-radius: 15px;">
             <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
-              <img src="<?= $item->img ?>" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 300px;" class="img-fluid" alt="<?= $item->name ?>" />
+              <img src="Public/images/<?= $item->id ?>.png" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 300px;" class="img-fluid" alt="<?= $item->name ?>" />
               <a href="#!">
                 <div class="mask"></div>
               </a>
@@ -57,7 +57,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
     </div>
   </div>
 </section>
-<script src="js/index.js"></script>
+<script src="Public/js/index.js"></script>
 </body>
 
 </html>

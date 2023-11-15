@@ -1,5 +1,5 @@
 <?php
-include("conection/dbcon.php");
+include("dbcon.php");
 
 function tt($value)
 {
@@ -57,7 +57,7 @@ function selectOneFromDb($table, $params = [])
     return $stmt->fetch();
 }
 
-function insertDataInToDb($table, $params)
+function insertDataToDb($table, $params, $conn)
 {
     $i = 0;
     $column = '';
@@ -75,7 +75,7 @@ function insertDataInToDb($table, $params)
     }
     $sql = "INSERT INTO $table ($column)VALUES($mask)";
     $stmt = $conn->prepare($sql);
-    $stmt->execute($params);
+    $stmt->execute();
     return $conn->lastInsertId();
 }
 
@@ -106,3 +106,15 @@ function removeFromCart($itemToRemove)
     }
     return $cart;
 }
+
+function deleteFromDb($table, $id, $conn)
+{
+    if (is_numeric($id)) {
+        $sql = "DELETE FROM $table WHERE id = $id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        // return $conn->lastInsertId();
+    }
+}
+
+// DELETE FROM `products` WHERE `products`.`id` = 5
