@@ -86,4 +86,10 @@ if (isset($data['num'])) {
     echo json_encode(count($_SESSION['items']));
     die();
 }
+
+if (isset($data['removeProd'])) {
+    deleteFromDb('products', $data['removeProd'], $conn);
+    echo json_encode(count($_SESSION['items']));
+    die();
+}
 $conn = null;

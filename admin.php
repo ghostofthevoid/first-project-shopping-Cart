@@ -61,36 +61,16 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
                         </tr>
                     </thead>
                     <?php foreach ($products as $item) : ?>
-                        <tbody>
+                        <tbody class="item-body">
                             <tr>
                                 <th scope="row"><?= $item->id ?></th>
                                 <td><?= $item->name ?></td>
                                 <td><?= $item->price ?>$</td>
                                 <td><img src="Public/images/<?= $item->id ?>.png" alt="#" style="height: 150px; width: 150px"></td>
-                                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">Remove</button></td>
+                                <td><button type="button" class="btn btn-danger remove-btn" delete-btn-id="<?= $item->id ?>">
+                                        Remove</button></td>
                             </tr>
                         </tbody>
-
-                        <!-- The Modal -->
-                        <div class="modal fade" id="myModal">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <p>Are you sure you want to remove the product?</p>
-                                    </div>
-
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-success ok-remove-btn" data-bs-dismiss="modal">Ok</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- the modal end -->
                     <?php endforeach; ?>
                 </table>
                 <div class="container-fluid mt-3 bg-light">
@@ -105,6 +85,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
     <!-- end main section -->
 
     <script src="Public/js/components/stop_resubmit.js"></script>
+    <script src="Public/js/components/admin.js"></script>
 </body>
 
 <?php

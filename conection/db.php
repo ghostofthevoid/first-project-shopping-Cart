@@ -113,8 +113,6 @@ function deleteFromDb($table, $id, $conn)
         $sql = "DELETE FROM $table WHERE id = $id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        // return $conn->lastInsertId();
+        //return $conn->lastInsertId();
     }
 }
-
-// DELETE FROM `products` WHERE `products`.`id` = 5

@@ -9,22 +9,17 @@ deleteButton.forEach((button, index) => {
   //remove item from localStorage and html
   button.addEventListener("click", (e) => {
     const currentBtn = e.currentTarget;
+    let pick = currentBtn.getAttribute("delete-btn-id");
     localStorage.removeItem(itemNames[index].innerText.replace(/\s/g, "_"));
-    currentBtn.closest(".cart").remove();
-  });
-});
-//=======================================================
 
-deleteButton.forEach((deleteButton, index) => {
-  deleteButton.addEventListener("click", (e) => {
-    let del = e.currentTarget;
-    let pick = del.getAttribute("delete-btn-id");
+    currentBtn.closest(".cart").remove();
     if (pick) {
       const obj = { deleteId: pick };
       sendDataToPHP(obj, index);
     }
   });
 });
+//=======================================================
 
 function sendDataToPHP(data, index) {
   // URL of the PHP script
@@ -32,7 +27,7 @@ function sendDataToPHP(data, index) {
 
   // Request parameters
   const requestOptions = {
-    method: "POST", // You can use 'GET' if you prefer
+    method: "POST",
     headers: {
       "Content-Type": "application/json", // Adjust content type based on your needs
     },
