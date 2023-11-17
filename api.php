@@ -86,10 +86,12 @@ if (isset($data['num'])) {
     echo json_encode(count($_SESSION['items']));
     die();
 }
-
+// removing products from dataBase and images from folder images
 if (isset($data['removeProd'])) {
+    $name = "{$data['removeProd']}.png";
     deleteFromDb('products', $data['removeProd'], $conn);
-    echo json_encode(count($_SESSION['items']));
+    $result = eraseImage("Public/images/", $name);
+    echo json_encode($result);
     die();
 }
 $conn = null;

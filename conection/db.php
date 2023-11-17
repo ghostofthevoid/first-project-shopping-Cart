@@ -4,7 +4,7 @@ include("dbcon.php");
 function tt($value)
 {
     echo '<pre>';
-    print_r($value);
+    var_dump($value);
     echo '</pre>';
 }
 
@@ -114,5 +114,21 @@ function deleteFromDb($table, $id, $conn)
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         //return $conn->lastInsertId();
+    }
+}
+
+function eraseImage($folderPath, $imageName)
+{
+    $filePath = $folderPath . $imageName;
+
+    if (file_exists($filePath)) {
+
+        if (unlink($filePath)) {
+            return "File '$imageName' has been removed successfully.";
+        } else {
+            return "Error removing the file '$imageName'.";
+        }
+    } else {
+        return "File '$imageName' does not exist.";
     }
 }
