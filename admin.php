@@ -12,39 +12,55 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
 <link rel="stylesheet" href="tests/product_list.css">
 
 <body>
-    <!-- form start -->
-    <div class="offcanvas offcanvas-sm offcanvas-end .was-validated" id="add-form">
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-        <div class="container-sm  ">
-            <h2>Stacked form</h2>
-            <form method="post" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" class="was-validated" enctype="multipart/form-data">
-                <div class="mb-3 mt-3">
-                    <label for="name">Product's name:</label>
-                    <input type="text" class="form-control  " placeholder="Enter name" name="name" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Form to add a product</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="mb-3">
-                    <label for="color">Product's color:</label>
-                    <input type="text" class="form-control" placeholder="Enter color" name="color" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <!-- form start -->
+                    <div class="container-sm  ">
+                        <form method="post" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" class="was-validated" enctype="multipart/form-data">
+                            <div class="mb-3 mt-3">
+                                <label for="name">Product's name:</label>
+                                <input type="text" class="form-control  " placeholder="Enter name" name="name" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="color">Product's color:</label>
+                                <input type="text" class="form-control" placeholder="Enter color" name="color" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="price">Product's price:</label>
+                                <input type="text" class="form-control" placeholder="Enter price" name="price" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <label for="pwd">Product's image:</label>
+                                <input class="form-control-sm" type="file" name="img" id="fileToUpload">
+                            </div>
+                            <button type="submit" name="submit" class="btn butt">Submit</button>
+                        </form>
+                    </div>
+                    <!-- form end -->
                 </div>
-                <div class="mb-3">
-                    <label for="price">Product's price:</label>
-                    <input type="text" class="form-control" placeholder="Enter price" name="price" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="input-group mb-3">
-                    <label for="pwd">Product's image:</label>
-                    <input class="form-control-sm" type="file" name="img" id="fileToUpload">
-                </div>
-                <button type="submit" name="submit" class="btn butt">Submit</button>
-            </form>
+            </div>
         </div>
     </div>
-    <!-- form end -->
+    </div>
+
+    <!-- the modal end -->
     <!-- main section -->
     <section class="h-50  h-custom py-5 justify-content-center" style="background-color: #eee;">
 
@@ -75,7 +91,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
                 </table>
                 <div class="container-fluid mt-3 bg-light">
                     <h3>Add a product to db</h3>
-                    <button class="btn butt" type="button" data-bs-toggle="offcanvas" data-bs-target="#add-form">
+                    <button class="btn butt" type="button" data-bs-toggle="modal" data-bs-target="#myModal">
                         Add product
                     </button>
                 </div>
