@@ -132,3 +132,24 @@ function eraseImage($folderPath, $imageName)
         return "File '$imageName' does not exist.";
     }
 }
+
+// UPDATE `products` SET `price` = '600' WHERE `products`.`id` = 93
+function updateProductData($table, $id, $params)
+{
+    global $conn;
+    $i = 0;
+    $str = '';
+    foreach ($params as $key => $value) {
+        if ($i === 0) {
+            $str = $str . $key . " = '" . $value . "'";
+        } else {
+            $str = $str . ", " . $key . " = '" . $value . "'";
+        }
+        $i++;
+    }
+    $sql = "UPDATE $table SET $str WHERE `id` = $id";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    return $conn->lastInsertId();
+}

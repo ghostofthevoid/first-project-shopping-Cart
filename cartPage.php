@@ -31,7 +31,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
         <div class="container h-100 py-5 ">
             <div class="row d-flex  justify-content-center h-100 ">
                 <div class="col-xl-8">
-                    <div class="card shopping-cart " style="border-radius: 15px;">
+                    <div class="card shopping-cart justify-content-center py-5" style="border-radius: 15px;">
                         <?php if (!empty($items)) : ?>
                             <div class="card-body text-black ">
                                 <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Your products</h3>
@@ -72,8 +72,10 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
                                 </div>
                             </div>
                         <?php else : ?>
-                            <div class="alert alert-primary py-5">
-                                <strong>Info!</strong> Your cart is empty pleas GO back <a href="index.php" class="alert-link">HOME:)</a>.
+                            <div class="container  py-5 ">
+                                <div class="alert alert-primary py-5">
+                                    <strong>Info!</strong> Your cart is empty pleas GO back <a href="index.php" class="alert-link">HOME:)</a>.
+                                </div>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -85,5 +87,6 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
     <script src="Public/js/components/cauntQuantity.js"></script>
     <script src="Public/js/components/deleteBtn.js"></script>
 </body>
+<?php include("footer.php"); ?>
 
 </html>

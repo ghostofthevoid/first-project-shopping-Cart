@@ -1,0 +1,36 @@
+:root {
+  --color1: #7269e7;
+}
+
+.table {
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.offcanvas {
+  background: #e7e6ec !important;
+}
+.butt {
+  color: #f0f8ff;
+  background: var(--color1);
+}
+.butt:hover {
+  color: aliceblue;
+  background: #5331b8;
+}
+.add-btn {
+  position: relative;
+  max-width: fit-content;
+  justify-content: center !important;
+  padding-top: 7px;
+  height: 60px;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* footer */
+
+footer {
+  padding: 30px 0;
+  background-color: rgb(32, 31, 31) !important;
+}

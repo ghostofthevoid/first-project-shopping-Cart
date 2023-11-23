@@ -1,46 +1,10 @@
 <?php
 session_start();
 include "connector.php";
-
-// if (($_REQUEST['test'] ?? 0) == 1) {
-//     echo json_encode($_REQUEST);
-// } else {
-//     echo json_encode($_POST);
-// }
-// $result = explode("/", $_SERVER['REQUEST_URI']);
-// $result = end($result);
-
-// switch ($result) {
-//     case "page1":
-//         echo "rout1";
-//         break;
-
-//     default:
-//         echo "rout2";
-//         break;
-// }
-
-//POST REQUEST GET DATA
-// $json = file_get_contents('php://input');
-// echo $json;
-
-// $data = json_decode(file_get_contents('php://input'), true);
-// $id = $data['id'];
-
-// $sql = "SELECT * FROM products WHERE id = :id";
-
-// $stmt = $conn->prepare($sql);
-// $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-
-// $stmt->execute();
-// $stmt->fetchAll();
-
-// $conn = null;
-
-function callToDb($id, $conn)
+function callToDb($table, $id, $conn)
 {
     try {
-        $sql = "SELECT * FROM products WHERE id = :id";
+        $sql = "SELECT * FROM $table WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -70,7 +34,7 @@ if (!isset($_SESSION['items'])) {
 
 if (isset($data['deleteId'])) {
     $_SESSION['items'] = removeFromCart($data['deleteId']);
-    $result = callToDb($data['deleteId'], $conn);
+    $result = callToDb('products', $data['deleteId'], $conn);
     $arrayOfData = array('quantityOfItems' => count($_SESSION['items']), 'item' => $result);
     echo json_encode($arrayOfData);
     die();
@@ -78,7 +42,7 @@ if (isset($data['deleteId'])) {
 
 if (isset($data['num'])) {
 
-    $result = callToDb($data['num'], $conn);
+    $result = callToDb('products', $data['num'], $conn);
 
     if (!in_array(json_encode($result), $_SESSION['items'])) {
         array_push($_SESSION['items'], json_encode($result));
@@ -94,4 +58,12 @@ if (isset($data['removeProd'])) {
     echo json_encode($result);
     die();
 }
+
+// Request data for editing
+if (isset($data['editProd'])) {
+    $result = callToDb('products', $data['editProd'], $conn);
+    echo json_encode($result);
+    die();
+}
+
 $conn = null;

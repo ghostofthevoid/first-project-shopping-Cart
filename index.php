@@ -47,7 +47,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
             <hr class="my-0" />
             <div class="card-body">
               <div class="d-flex justify-content-center align-items-center pb-2 mb-1">
-                <button type="button" class="btn add-btn add-product-to-card btn-lg" data-shit-id="<?= $item->id ?>">Buy now</button>
+                <button type="button" class="btn add-btn add-product-to-card btn-lg" data-shit-id="<?= $item->id ?>">Add to cart</button>
               </div>
             </div>
           </div>
@@ -59,5 +59,6 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
 </section>
 <script src="Public/js/index.js"></script>
 </body>
+<?php include("footer.php"); ?>
 
 </html>
