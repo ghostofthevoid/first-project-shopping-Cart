@@ -1,26 +1,7 @@
 <?php
 session_start();
 include "connector.php";
-function callToDb($table, $id, $conn)
-{
-    try {
-        $sql = "SELECT * FROM $table WHERE id = :id";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($result) {
-            return $result;
-        } else {
-            http_response_code(404);
-            return array('error' => 'No product found for the given id');
-        }
-    } catch (PDOException $e) {
-        http_response_code(500);
-        return array('error' => 'Database error: ' . $e->getMessage());
-    }
-}
 //================================================================================
 
 header('Content-Type: application/json');
@@ -59,11 +40,31 @@ if (isset($data['removeProd'])) {
     die();
 }
 
-// Request data for editing
-if (isset($data['editProd'])) {
-    $result = callToDb('products', $data['editProd'], $conn);
-    echo json_encode($result);
-    die();
-}
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['name'])) {
+        $name = $price = $color = "";
+        $name = test_input($_POST['name']);
+        $price = test_input($_POST['price']);
+        $color = test_input($_POST['color']);
+
+        $insertArray = ["name" => $name, 'price' => $price, 'color' => $color];
+
+        $lastInsertId =  insertDataToDb('products', $insertArray, $conn);
+
+
+        if (!empty($_FILES["img"])) {
+            $name = "{$lastInsertId}.png";
+            try {
+                move_uploaded_file($_FILES['img']['tmp_name'], "Public/images/$name");
+            } catch (\Throwable $th) {
+                echo json_encode($th);
+            }
+        }
+        $result = callToDb('products', $lastInsertId, $conn);
+        echo json_encode($result);
+        // $response = ['status' => 'success', 'message' => 'Form data received successfully'];
+        // echo json_encode($response);
+    }
+}
 $conn = null;

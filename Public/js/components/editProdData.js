@@ -1,40 +1,39 @@
-let removefromDbBtn = document.querySelectorAll(".remove-btn");
 let editBtn = document.querySelectorAll(".edit-btn");
 let editName = document.getElementById("editName");
 let editPrice = document.getElementById("editPrice");
 let editColor = document.getElementById("editColor");
-const submitBtn = document.querySelector(".butt");
+var editModal = new bootstrap.Modal(document.getElementById("editModal"));
+let editFormData = document.getElementById("edit-form");
+let temp = 0;
 
-removefromDbBtn.forEach((button) => {
-  button.addEventListener("click", (e) => {
-    if (confirm("Are you sure that you want to REMOVE the product?")) {
-      const currentBtn = e.currentTarget;
-      currentBtn.closest(".item-body").remove();
-      let pick = currentBtn.getAttribute("delete-btn-id");
-
-      if (pick) {
-        const obj = { removeProd: pick };
-        sendDataToPHP(obj);
-      }
-    }
-  });
-});
-
+//Take data to edit from database
 editBtn.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const currentBtn = e.currentTarget;
-    let pick = currentBtn.getAttribute("edit-btn-id");
-    if (pick) {
-      const obj = { editProd: pick };
-      sendDataToPHP(obj, dataToEdit);
+    let currentBtnId = currentBtn.getAttribute("edit-btn-id");
+    temp = currentBtnId;
+    if (currentBtnId) {
+      const obj = { editProd: currentBtnId };
+      sendDataToServer("editFormApi.php", obj, dataToEdit);
     }
   });
 });
+// Edit given data
+editFormData.addEventListener("click", () => {
+  let curId = temp;
+  const editDataObj = {
+    editedName: editName.value,
+    editedPrice: editPrice.value,
+    editedColor: editColor.value,
+    id: curId,
+  };
+  if (curId) {
+    sendDataToServer("editFormApi.php", editDataObj, dataToEdit);
+  }
+  editModal.hide();
+});
 
-function sendDataToPHP(data, callback) {
-  const url = "api.php";
-
-  // Request parameters
+function sendDataToServer(url, data, callback) {
   const requestOptions = {
     method: "POST",
     headers: {
@@ -48,8 +47,9 @@ function sendDataToPHP(data, callback) {
     .then((response) => response.json()) // Parse the response as JSON
     .then((data) => {
       if (callback) {
-        console.log(data);
         callback(data);
+      } else {
+        console.log(data);
       }
     })
     .catch((error) => console.error("Error:", error));

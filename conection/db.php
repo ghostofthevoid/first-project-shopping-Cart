@@ -153,3 +153,33 @@ function updateProductData($table, $id, $params)
     $stmt->execute();
     return $conn->lastInsertId();
 }
+
+function callToDb($table, $id, $conn)
+{
+    try {
+        $sql = "SELECT * FROM $table WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result;
+        } else {
+            http_response_code(404);
+            return array('error' => 'No product found for the given id');
+        }
+    } catch (PDOException $e) {
+        http_response_code(500);
+        return array('error' => 'Database error: ' . $e->getMessage());
+    }
+}
+
+function test_input($data)
+{
+    $data = ucfirst($data);
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}

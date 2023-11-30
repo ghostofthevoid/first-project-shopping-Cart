@@ -15,13 +15,13 @@ deleteButton.forEach((button, index) => {
     currentBtn.closest(".cart").remove();
     if (pick) {
       const obj = { deleteId: pick };
-      sendDataToPHP(obj, index);
+      sendDataToServer(obj, index);
     }
   });
 });
 //=======================================================
 
-function sendDataToPHP(data, index) {
+function sendDataToServer(data, index) {
   // URL of the PHP script
   const url = "api.php";
 
