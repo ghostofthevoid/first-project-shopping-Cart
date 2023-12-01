@@ -1,3 +1,3 @@
 <?php
-include "conection/dbcon.php";
-include("conection/db.php");
+include "conection/dbConnection.php";
+include("conection/allFunctions.php");

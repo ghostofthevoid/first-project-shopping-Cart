@@ -81,7 +81,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
                         <form method="post" action="" enctype="multipart/form-data">
                             <div class="mb-3 mt-3">
                                 <label for="name">Edit name:</label>
-                                <input type="text" class="form-control fw-bold" id="editName" placeholder="Enter name" name="name" value="">
+                                <input type="text" class="form-control fw-bold" id="editName" placeholder="Enter name" name="name" value="" required>
                             </div>
                             <div class="mb-3">
                                 <label for="color">Edit color:</label>
@@ -89,7 +89,7 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
                             </div>
                             <div class="mb-3">
                                 <label for="price">Edit price:</label>
-                                <input type="text" class="form-control fw-bold" id="editPrice" placeholder="Enter price" name="price" value="">
+                                <input type="text" class="form-control fw-bold" id="editPrice" placeholder="Enter price" name="price" value="0">
                             </div>
                             <div class="input-group mb-3">
                                 <label for="pwd">Edit image: </label><br>
@@ -126,12 +126,16 @@ isset($_SESSION["items"]) ? $quantity = count($_SESSION["items"]) : $quantity = 
                             </tr>
                         </thead>
                         <?php foreach ($products as $item) : ?>
-                            <tbody id="tbody" class="item-body">
+                            <tbody class="item-body">
                                 <tr>
                                     <th scope="row" class="pl-5"><?= $item->id ?></th>
-                                    <td><?= $item->name ?></td>
-                                    <td><?= $item->price ?>$</td>
-                                    <td><img src="Public/images/<?= $item->id ?>.png" alt="#" style="height: 150px; width: 150px"></td>
+                                    <td id="prodCell2<?= $item->id ?>">
+                                        <h4 class="name text-dark"><?= $item->name ?></h4>
+                                        <h6 style="color: #9e9e9e;">Color: <?= $item->color ?></h6>
+                                    </td>
+                                    <td id="prodCell3<?= $item->id ?>"><?= $item->price ?>$</td>
+                                    <!-- <td id="prodCell4<?= $item->id ?>"><?= $item->color ?></td> -->
+                                    <td id="prodCell4<?= $item->id ?>"><img src="Public/images/<?= $item->id ?>.png" alt="#" style="height: 150px; width: 150px"></td>
                                     <td>
                                         <button type="button" class="btn btn-warning edit-btn" edit-btn-id="<?= $item->id ?>" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
                                         <button type="button" class="btn btn-danger remove-btn" delete-btn-id="<?= $item->id ?>"> Remove</button>

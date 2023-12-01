@@ -10,10 +10,14 @@ itemPrice.forEach((currentItemPrice, index) => {
   let currentStorageValue = localStorage.getItem(
     itemName[index].innerText.replace(/\s/g, "_")
   );
-  let itemPrice = Number(currentItemPrice.innerText.match(/\d+/g));
+
+  // The regular expression to match a float number that can have a dot or not
+  let itemPrice = parseFloat(
+    currentItemPrice.innerText.match(/(\d*\.\d+|\d+)/g)
+  );
 
   if (currentStorageValue) {
-    totalSum += itemPrice * Number(currentStorageValue);
+    totalSum += itemPrice * parseFloat(currentStorageValue);
   } else {
     totalSum += itemPrice;
   }
@@ -30,12 +34,16 @@ for (let i = 0; i < plus.length; i++) {
   let count = parseInt(
     localStorage.getItem(itemName[i].innerText.replace(/\s/g, "_")) || 1
   ); // get data of item counter from localStorage
-  let currentitemPrice = Number(itemPrice[i].innerText.match(/\d+/g)); //get itemPrice of current item
+  let currentitemPrice = parseFloat(
+    itemPrice[i].innerText.match(/(\d*\.\d+|\d+)/g)
+  ); //get itemPrice of current item
 
   plus[i].addEventListener("click", () => {
     if (!isNaN(count)) {
       count++;
-      totalAmount.innerText = totalSum += currentitemPrice;
+      totalAmount.innerText = parseFloat(
+        (totalSum += currentitemPrice).toFixed(2)
+      );
       updateValue(count, i);
     }
   });
@@ -44,7 +52,9 @@ for (let i = 0; i < plus.length; i++) {
     if (!isNaN(count)) {
       if (count > 1) {
         count--;
-        totalAmount.innerText = totalSum -= currentitemPrice;
+        totalAmount.innerText = parseFloat(
+          (totalSum -= currentitemPrice).toFixed(2)
+        );
         updateValue(count, i);
       }
     }

@@ -22,7 +22,10 @@ if (isset($data['id'])) {
     $price = test_input($data['editedPrice']);
     $color = test_input($data['editedColor']);
 
-    $editArray = ["name" => $name, 'price' => $price, 'color' => $color];
+    // the output which contains only the digits, the regular expression [^0-9.] matches any character that is not a digit or a dot.
+    $onlyDigitsPrice = preg_replace("/[^0-9.]/", "", $price);
+
+    $editArray = ["name" => $name, 'price' => $onlyDigitsPrice, 'color' => $color];
 
     updateProductData('products', $id, $editArray);
 

@@ -1,5 +1,5 @@
 <?php
-include("dbcon.php");
+include("dbConnection.php");
 
 function tt($value)
 {
@@ -92,7 +92,6 @@ function flattenArray($array)
     return $result;
 }
 
-//=============================================
 function removeFromCart($itemToRemove)
 {
 

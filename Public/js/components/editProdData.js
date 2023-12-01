@@ -28,7 +28,17 @@ editFormData.addEventListener("click", () => {
     id: curId,
   };
   if (curId) {
-    sendDataToServer("editFormApi.php", editDataObj, dataToEdit);
+    sendDataToServer("editFormApi.php", editDataObj, (val) => {
+      let cellName, cellPrice, imageCell;
+      cellName = document.getElementById("prodCell2" + val[0]["id"]);
+      cellPrice = document.getElementById("prodCell3" + val[0]["id"]);
+      imageCell = document.getElementById("prodCell4" + val[0]["id"]);
+
+      cellName.querySelector("h4").innerText = val[0]["name"];
+      cellName.querySelector("h6").innerText = "Color: " + val[0]["color"];
+      cellPrice.innerHTML = val[0]["price"] + "$";
+      imageCell.innerHTML = `<img src="Public/images/${val[0].id}.png" alt="#" style="height: 150px; width: 150px">`;
+    });
   }
   editModal.hide();
 });
